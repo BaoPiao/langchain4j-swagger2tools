@@ -6,8 +6,7 @@ import cn.hutool.json.JSONUtil;
 import com.baopiao.specification.config.SwaggerToolConfig;
 import dev.langchain4j.agent.tool.ToolSpecification;
 import dev.langchain4j.model.chat.ChatLanguageModel;
-import dev.langchain4j.model.chat.request.json.JsonSchemaElement;
-import dev.langchain4j.model.chat.request.json.JsonStringSchema;
+import dev.langchain4j.model.chat.request.json.*;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.service.AiServices;
 import dev.langchain4j.service.tool.ToolExecutor;
@@ -103,6 +102,27 @@ public class SwaggerToolHelperTest {
         Assert.assertNotNull(properties);
         Assert.assertEquals(2, properties.size());
 
-        System.out.println(toolSpecificationToolExecutorMap);
+        // 测试Body
+        JsonSchemaElement userInputBean = properties.get("UserInputBean");
+        Assert.assertNotNull(userInputBean);
+        Assert.assertTrue(userInputBean instanceof JsonObjectSchema);
+        Assert.assertNotNull(((JsonObjectSchema) userInputBean).required());
+        Assert.assertEquals(1, ((JsonObjectSchema) userInputBean).required().size());
+        Assert.assertEquals("num", ((JsonObjectSchema) userInputBean).required().get(0));
+        Assert.assertEquals("用户信息", ((JsonObjectSchema) userInputBean).description());
+        Map<String, JsonSchemaElement> properties1 = ((JsonObjectSchema) userInputBean).properties();
+        Assert.assertEquals(12, properties1.size());
+
+        JsonSchemaElement addressInput = properties1.get("addressInput");
+        Assert.assertNotNull(addressInput);
+        Assert.assertTrue(addressInput instanceof JsonStringSchema);
+        Assert.assertEquals("地址", ((JsonStringSchema) addressInput).description());
+
+//        JsonSchemaElement ageInput = properties1.get("byteArrayInput");
+//        Assert.assertNotNull(ageInput);
+//        Assert.assertTrue(ageInput instanceof JsonArraySchema);
+//        Assert.assertEquals("车牌号码", ((JsonStringSchema) ageInput).description());
+//        Assert.assertTrue(((JsonArraySchema) ageInput).items() instanceof  JsonStringSchema);
+
     }
 }
