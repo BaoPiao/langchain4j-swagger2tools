@@ -8,7 +8,7 @@
 <dependency>
     <groupId>io.github.baopiao</groupId>
     <artifactId>langchain4j-swagger2tools</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
 </dependency>
 ```
 2. 使用SwaggerToolHelper将Swagger转换为Tools
