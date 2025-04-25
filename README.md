@@ -13,7 +13,7 @@ java版本： 17
 <dependency>
     <groupId>io.github.baopiao</groupId>
     <artifactId>langchain4j-swagger2tools</artifactId>
-    <version>1.1</version>
+    <version>1.2-SNAPSHOT</version>
 </dependency>
 ```
 ### 代码示例

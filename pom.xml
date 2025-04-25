@@ -6,7 +6,7 @@
 
     <groupId>io.github.baopiao</groupId>
     <artifactId>langchain4j-swagger2tools</artifactId>
-    <version>1.1</version>
+    <version>1.2-SNAPSHOT</version>
     <name>langchain4j-swagger2tools</name>
     <description>本工具用于将swagger文档直接转换为LangChain4j的Tools对象，0改动将接口整合到大模型中！</description>
     <url>https://github.com/BaoPiao/langchain4j-swagger2tools</url>

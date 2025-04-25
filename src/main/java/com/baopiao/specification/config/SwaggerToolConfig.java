@@ -40,7 +40,9 @@ public class SwaggerToolConfig {
      */
     private Executor executor;
 
-
+    /**
+     * 设置请求头
+     */
     private Map<String, String> headerMap;
 
 
