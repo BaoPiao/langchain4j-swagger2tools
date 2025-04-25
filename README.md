@@ -3,7 +3,12 @@
 本工具用于将swagger文档直接转换为LangChain4j的Tools对象，0改动将接口整合到大模型中！
 
 ## 使用方法
-1. 引入依赖
+### 环境信息
+java版本： 17
+
+当前支持的swagger版本：2.0
+
+### 引入依赖
 ```xml
 <dependency>
     <groupId>io.github.baopiao</groupId>
@@ -11,7 +16,8 @@
     <version>1.1</version>
 </dependency>
 ```
-2. 使用SwaggerToolHelper将Swagger转换为Tools
+### 代码示例
+使用SwaggerToolHelper将Swagger文档转换为Tools
 ```java
 ChatLanguageModel model = OpenAiChatModel.builder()
             .apiKey("sk-**") // 你的api key
