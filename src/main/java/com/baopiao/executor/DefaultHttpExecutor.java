@@ -36,27 +36,33 @@ public class DefaultHttpExecutor implements Executor {
             return "构建请求地址失败" + e.getMessage();
         }
 
-
         try {
             if (request instanceof GetRequest) {
-                HttpRequest build = httpBuilder.GET().build();
-                return client.send(build, HttpResponse.BodyHandlers.ofString()).body();
-
+                HttpRequest.Builder getBuilder = httpBuilder.GET();
+                setHeader(swaggerToolConfig, getBuilder);
+                return client.send(getBuilder.build(), HttpResponse.BodyHandlers.ofString()).body();
             } else if (request instanceof PostRequest) {
                 String requestBody = new String();
                 if (ObjectUtil.isNotEmpty(request.getBodyParameter())) {
                     requestBody = request.getBodyParameter().getBodyJson().toJSONString(0);
                 }
-                HttpRequest build = httpBuilder.POST(HttpRequest.BodyPublishers.ofString(requestBody)).build();
-
-                return client.send(build, HttpResponse.BodyHandlers.ofString()).body();
-
+                HttpRequest.Builder postBuilder = httpBuilder.POST(HttpRequest.BodyPublishers.ofString(requestBody));
+                setHeader(swaggerToolConfig, postBuilder);
+                return client.send(postBuilder.build(), HttpResponse.BodyHandlers.ofString()).body();
             } else {
                 return "当前请求类型不支持";
             }
         } catch (Exception e) {
             return "请求失败: " + e.getMessage();
         }
+    }
+
+    private void setHeader(SwaggerToolConfig swaggerToolConfig, HttpRequest.Builder postBuilder) {
+        Optional.ofNullable(swaggerToolConfig.getHeaderMap()).ifPresent(
+                headerMap -> headerMap.forEach((key, value) -> {
+                    postBuilder.header(key, value);
+                })
+        );
     }
 
     @NotNull

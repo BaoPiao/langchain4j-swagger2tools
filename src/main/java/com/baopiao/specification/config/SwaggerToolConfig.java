@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.http.Header;
+
+import java.util.Map;
 
 @Data
 @NoArgsConstructor
@@ -38,7 +41,7 @@ public class SwaggerToolConfig {
     private Executor executor;
 
 
-    //TODO 请求头信息
+    private Map<String, String> headerMap;
 
 
 }
